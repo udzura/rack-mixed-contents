@@ -21,6 +21,7 @@ module Rack
 
     def report_only_rule(&b)
       b.call(@rule_report_only)
+      @rule_report_only.report_uri ||= "/_/csp-reports"
       @rule_report_only.active = true
     end
 

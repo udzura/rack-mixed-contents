@@ -1,8 +1,4 @@
-# Rack::Mixed::Contents
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rack/mixed/contents`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+# Rack::MixedContents
 
 ## Installation
 
@@ -22,7 +18,24 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+use Rack::MixedContents do |csp|
+  csp.rule do |rule|
+    rule.default_src = 'self'
+  end
+  # if you want to accept report
+  csp.report_only_rule do |rule|
+    rule.default_src = 'self'
+    # rule.report_uri = "https://report-uri.io/..."
+  end
+  csp.on_reported do |json|
+    # Use if accept CSP report on your rack app.
+    # Send JSON to kibana/fluentd or something
+  end
+end
+
+run YouApp.new
+```
 
 ## Development
 
@@ -32,7 +45,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rack-mixed-contents. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/udzura/rack-mixed-contents. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
